@@ -33,11 +33,9 @@ on:
       buildVariant:
         description: 'Select Build Variant'
         required: true
-        default: 'EngineeringRelease'
+        default: 'fullRelease'
         type: choice
         options:
-          - EngineeringRelease
-          - EngineeringDebug
           - fullRelease
           - fullDebug
           - aapsclientRelease
@@ -91,7 +89,6 @@ jobs:
         run: |
           BUILD_VARIANT="${{ github.event.inputs.buildVariant }}"
           echo "BUILD_VARIANT=$BUILD_VARIANT" >> $GITHUB_ENV
-          # Harf duyarlılığını korumak için filtreyi güncelledik
           VARIANT_FLAVOR=$(echo "$BUILD_VARIANT" | sed -E 's/(Release|Debug)$//' | tr '[:upper:]' '[:lower:]')
           VARIANT_TYPE=$(echo "$BUILD_VARIANT" | grep -oE '(Release|Debug)$' | tr '[:upper:]' '[:lower:]')
           echo "VARIANT_FLAVOR=$VARIANT_FLAVOR" >> $GITHUB_ENV
