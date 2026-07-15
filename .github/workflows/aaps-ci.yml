@@ -55,6 +55,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Copy Keystore to Temp Folder
+        run: |
+          mkdir -p "$RUNNER_TEMP/keystore"
+          cp androidaps.jks "$RUNNER_TEMP/keystore/keystore.jks"
+          echo "✅ Keystore copied safely before switching branches."
+
       - name: Fetch selected tag from upstream
         run: |
           git remote add upstream https://github.com/nightscout/AndroidAPS.git || true
@@ -78,12 +84,6 @@ jobs:
         run: |
           git checkout refs/tags/${{ github.event.inputs.tagName }}
           echo "✅ Checked out tag ${{ github.event.inputs.tagName }}"
-
-      - name: Copy Keystore to App Folder
-        run: |
-          mkdir -p "$RUNNER_TEMP/keystore"
-          cp androidaps.jks "$RUNNER_TEMP/keystore/keystore.jks"
-          echo "✅ Keystore copied to temp folder."
 
       - name: Set BUILD_VARIANT
         run: |
