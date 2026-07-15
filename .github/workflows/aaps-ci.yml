@@ -1,4 +1,4 @@
-name: AAPS CI
+Name: AAPS CI
 
 on:
   workflow_dispatch:
@@ -130,7 +130,7 @@ jobs:
           -Dorg.gradle.caching=true \
           -Pandroid.injected.signing.store.file="$RUNNER_TEMP/keystore/keystore.jks" \
           -Pandroid.injected.signing.store.password="${{ secrets.ZIP_PASSWORD }}" \
-          -Pandroid.injected.signing.key.alias="${{ secrets.KEYSTORE_ALIAS }}" \
+          -Pandroid.injected.signing.key.alias="androidaps" \
           -Pandroid.injected.signing.key.password="${{ secrets.ZIP_PASSWORD }}"
 
       - name: Rename APKs with version
